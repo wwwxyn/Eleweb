@@ -4,11 +4,7 @@ import vip.epss.domain.User;
 
 import java.util.List;
 
-/**
- * @创建人 epss[wangzhanf]
- * @创建时间 2020/10/19 0019
- * @描述
- */
+
 public interface UserMapper {
     public abstract User selectByPrimaryKey(Integer key);
     public abstract List<User> select();

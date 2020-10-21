@@ -9,11 +9,7 @@ import vip.epss.utils.MD5Util;
 
 import java.util.List;
 
-/**
- * @创建人 epss[wangzhanf]
- * @创建时间 2020/10/19 0019
- * @描述
- */
+
 @Service(value = "userService")
 public class UserServiceImpl implements UserService {
     @Autowired

@@ -15,11 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-/**
- * @创建人 epss[wangzhanf]
- * @创建时间 2020/10/13 0013
- * @描述
- */
+
 public class MyBatisTest {
     InputStream resourceAsStream = null;
     SqlSessionFactory sqlSessionFactory = null;
