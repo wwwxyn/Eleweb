@@ -3,7 +3,12 @@ package vip.epss.utils;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * 返回的数据要包括实体类内容或者实体类的集合
+ * 消息
+ * 状态:
+ * 所以创建一个通用的消息封装体
+ */
 public class MessageAndData {
     private Integer statusCode;//返回状态码,类似于HTTP的4xx表示失败  2xx表示成功
     private String message;//提示消息
