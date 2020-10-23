@@ -10,19 +10,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import vip.epss.domain.Customer;
 import vip.epss.domain.User;
 import vip.epss.domain.UserExample;
+import vip.epss.service.CustomerService;
 import vip.epss.service.UserService;
 import vip.epss.utils.MD5Util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @创建人 epss[wangzhanf]
@@ -34,6 +32,8 @@ import java.util.UUID;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private CustomerService customerService;
 
     @RequestMapping(value = "/list",method = {RequestMethod.GET})
     public ModelAndView list(
@@ -50,6 +50,44 @@ public class UserController {
         PageInfo pageInfo = new PageInfo(users, 8);
         modelAndView.addObject("pageInfo",pageInfo);
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/cus",method = {RequestMethod.GET})
+    public ModelAndView cus(
+            @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
+            @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize
+
+    ){
+        //初始化,约束
+        PageHelper.startPage(pageNum, pageSize);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("pages/user/cuslist");
+        List<Customer> customers = customerService.selectByExample(null);
+        //使用pageHelper的方式封装数据,默认的导航列表长度为8
+        PageInfo pageInfo = new PageInfo(customers, 8);
+        modelAndView.addObject("pageInfo",pageInfo);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/deletecus",method = {RequestMethod.GET})
+    public String deletecus(@RequestParam(value = "cid",required = true)Integer cid){
+        Integer delete = userService.deleteByPrimaryKey(cid);
+        return "redirect:cuslist";
+    }
+
+
+    @RequestMapping(value = "/uptcus")
+    public ModelAndView uptcus(@RequestParam(value = "cid",required = true)Integer cid){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("pages/user/uptcusForm");
+        Customer customer = customerService.selectByPrimaryKey(cid);
+        modelAndView.addObject("customer",customer);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/updatecus")
+    public String update(Customer customer){
+        Integer update = customerService.updateByPrimaryKeySelective(customer);
+        return "redirect:cus";
     }
 
     @RequestMapping(value = "/ins")

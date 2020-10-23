@@ -132,7 +132,7 @@ CALL activity_insert ();
 commit;
 
 
-# 创建商户和活动映射表
+# 创建商户和活动映射表6
 drop table if exists business_to_activity;
 create table if not exists business_to_activity(
     baid integer auto_increment comment '索引主键',

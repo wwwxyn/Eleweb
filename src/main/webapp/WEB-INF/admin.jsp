@@ -37,6 +37,7 @@
 <hr/>
 <a href="${app}/user/list">用户管理</a>
 <a href="${app}/userrest/list">用户管理REST</a>
+<a href="${app}/user/cus">商户信息</a>
 <hr/>
 
 <!--提示消息框-->
