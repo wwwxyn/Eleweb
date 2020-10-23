@@ -71,8 +71,8 @@ public class UserController {
 
     @RequestMapping(value = "/deletecus",method = {RequestMethod.GET})
     public String deletecus(@RequestParam(value = "cid",required = true)Integer cid){
-        Integer delete = userService.deleteByPrimaryKey(cid);
-        return "redirect:cuslist";
+        Integer delete = customerService.deleteByPrimaryKey(cid);
+        return "redirect:cus";
     }
 
 
