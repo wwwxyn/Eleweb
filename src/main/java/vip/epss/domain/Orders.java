@@ -17,6 +17,16 @@ public class Orders {
 
     private Date addTime;
 
+    public Orders(Integer oid, Integer onumber, Integer ostatus, Integer fgid, Integer fcid, Integer fbid, Date addTime) {
+        this.oid = oid;
+        this.onumber = onumber;
+        this.ostatus = ostatus;
+        this.fgid = fgid;
+        this.fcid = fcid;
+        this.fbid = fbid;
+        this.addTime = addTime;
+    }
+
     public Integer getOid() {
         return oid;
     }

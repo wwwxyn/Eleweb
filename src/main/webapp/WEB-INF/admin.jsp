@@ -39,6 +39,8 @@
 <a target="dataDisplay" href="${app}/types/list">商品类别管理</a>
 <a target="dataDisplay" href="${app}/userrest/index">用户管理REST</a>
 <a target="dataDisplay" href="${app}/goodsrest/index">商品管理REST</a>
+<a target="dataDisplay" href="${app}/ordersrest/index">客户基本信息管理REST</a>
+
 <hr/>
 <iframe name="dataDisplay"  width="100%" height="1000" src="http://www.baidu.com">您的浏览器不支持内部框架,请升级</iframe>
 
