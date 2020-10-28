@@ -6,79 +6,71 @@ import vip.epss.dao.CustomerMapper;
 import vip.epss.domain.Customer;
 import vip.epss.domain.CustomerExample;
 import vip.epss.service.CustomerService;
-import vip.epss.utils.MD5Util;
+
 import java.util.List;
 
+/**
+ * @创建人 epss[wangzhanf]
+ * @创建时间 2020/10/27 0027
+ * @描述
+ */
 @Service(value = "customerService")
-public class CustomerServiceImpl  implements CustomerService {
-
+public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerMapper customerMapper;
 
     @Override
     public long countByExample(CustomerExample example) {
-        return customerMapper.countByExample(example);
+        return 0;
     }
 
     @Override
     public int deleteByExample(CustomerExample example) {
-        return customerMapper.deleteByExample(example);
+        return 0;
     }
 
     @Override
-    public int deleteByPrimaryKey(Integer uid) {
-        return customerMapper.deleteByPrimaryKey(uid);
+    public int deleteByPrimaryKey(Integer cid) {
+        return 0;
     }
 
     @Override
     public int insert(Customer record) {
-        //对传递过来的明文密码加密为密文然后比对
-        record.setCpass(MD5Util.getMD5(record.getCpass()));
-        return customerMapper.insert(record);
+        return 0;
     }
 
     @Override
     public int insertSelective(Customer record) {
-        //对传递过来的明文密码加密为密文然后比对
-        record.setCpass(MD5Util.getMD5(record.getCpass()));
-        return customerMapper.insertSelective(record);
+        return 0;
     }
 
     @Override
     public List<Customer> selectByExample(CustomerExample example) {
-        return customerMapper.selectByExample(example);
+        return null;
     }
 
     @Override
     public Customer selectByPrimaryKey(Integer cid) {
-        return customerMapper.selectByPrimaryKey(cid);
+        return null;
     }
 
     @Override
     public int updateByExampleSelective(Customer record, CustomerExample example) {
-        //对传递过来的明文密码加密为密文然后比对
-        record.setCpass(MD5Util.getMD5(record.getCpass()));
-        return customerMapper.updateByExampleSelective(record,example);
+        return 0;
     }
 
     @Override
     public int updateByExample(Customer record, CustomerExample example) {
-        //对传递过来的明文密码加密为密文然后比对
-        record.setCpass(MD5Util.getMD5(record.getCpass()));
-        return customerMapper.updateByExample(record,example);
+        return 0;
     }
 
     @Override
     public int updateByPrimaryKeySelective(Customer record) {
-        //对传递过来的明文密码加密为密文然后比对
-        record.setCpass(MD5Util.getMD5(record.getCpass()));
-        return customerMapper.updateByPrimaryKeySelective(record);
+        return 0;
     }
 
     @Override
     public int updateByPrimaryKey(Customer record) {
-        //对传递过来的明文密码加密为密文然后比对
-        record.setCpass(MD5Util.getMD5(record.getCpass()));
-        return customerMapper.updateByPrimaryKey(record);
+        return 0;
     }
 }

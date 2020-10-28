@@ -1,5 +1,6 @@
 package vip.epss.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,17 +8,17 @@ import java.util.Date;
  * @创建时间 2020/10/27 0027
  * @描述
  */
-public class TypesCondition extends Types {
+public class ActivityCondition extends Activity implements Serializable {
     private Date startDate;
     private Date endDate;
 
-    public TypesCondition(Integer tid, String tname, String tdes, String tavatar, Date addTime, Date startDate, Date endDate) {
-        super(tid, tname, tdes, tavatar, addTime);
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public ActivityCondition() {
     }
 
-    public TypesCondition() {
+    public ActivityCondition(Integer aid, String aname, String ades, Integer atype, Date addTime, Date startDate, Date endDate) {
+        super(aid, aname, ades, atype, addTime);
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public Date getStartDate() {

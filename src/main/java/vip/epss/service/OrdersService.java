@@ -6,7 +6,11 @@ import vip.epss.domain.OrdersExample;
 
 import java.util.List;
 
-
+/**
+ * @创建人 epss[wangzhanf]
+ * @创建时间 2020/10/27 0027
+ * @描述
+ */
 public interface OrdersService {
     long countByExample(OrdersExample example);
 

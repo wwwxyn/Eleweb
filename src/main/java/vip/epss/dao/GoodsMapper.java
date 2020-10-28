@@ -11,6 +11,7 @@ public interface GoodsMapper {
     int deleteByExample(GoodsExample example);
 
     int deleteByPrimaryKey(Integer gid);
+
     int insert(Goods record);
 
     int insertSelective(Goods record);

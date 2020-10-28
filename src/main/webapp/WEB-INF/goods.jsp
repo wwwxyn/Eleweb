@@ -48,7 +48,7 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
-                <form method="post" action="${app}/goodsrest/opt" enctype="multipart/form-data" class="form-horizontal" role="form">
+                <form method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
                     <%--input type="hidden" name="_method" value="POST" /--%>
                     <div class="form-group">
                         <label>gname:</label><input type="text" class="form-control"  name="gname" placeholder="请输入商品名称"/>
@@ -62,8 +62,7 @@
                     <div class="form-group">
                         <label>gavatar:</label>
                         <img data-my="disAvatar" src="" style="width: 100px;height: 100px;" />
-                        <input type="file" class="form-control" data-my="inputAvatar" name="file" placeholder="avatar">
-                        <input type="text" class="form-control"  name="gavatar" placeholder="商品图片"/>
+                        <input style="display: none;" type="file" class="form-control" data-my="inputAvatar" name="file" placeholder="avatar">
                     </div>
                     <div class="form-group">
                         <label>fbid:</label><input list="blist" type="text" class="form-control"  name="fbid" placeholder="所属商户"/>
@@ -99,7 +98,7 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
-                <form method="post" action="${app}/userrest/opt" enctype="multipart/form-data" class="form-horizontal" role="form">
+                <form method="post"  enctype="multipart/form-data" class="form-horizontal" role="form">
                     <div class="form-group">
                         <label>gid:</label><input readonly="readonly" type="text" class="form-control"  name="gid"  placeholder="请输入商品id"/>
                     </div>
@@ -113,13 +112,12 @@
                         <label>gprice:</label><input type="text" class="form-control"  name="gprice" placeholder="商品价格"/>
                     </div>
                     <div class="form-group">
-                        <label>addTime:</label><input type="date" class="form-control"  name="addTime" placeholder="添加时间"/>
+                        <label>addTime:</label><input type="datetime" class="form-control"  name="addTime" placeholder="添加时间"/>
                     </div>
                     <div class="form-group">
                         <label>gavatar:</label>
                         <img data-my="disAvatar" src="" style="width: 100px;height: 100px;" />
-                        <input type="file" class="form-control" data-my="inputAvatar" name="file" placeholder="avatar">
-                        <input type="text" class="form-control"  name="gavatar" placeholder="商品图片"/>
+                        <input style="display: none;" type="file" class="form-control" data-my="inputAvatar" name="file" placeholder="avatar">
                     </div>
                     <div class="form-group">
                         <label>fbid:</label><input list="bulist" type="text" class="form-control"  name="fbid" placeholder="所属商户"/>
@@ -206,17 +204,13 @@
 <script src="${app}/static/js/axios.js"></script>
 <script src="${app}/static/js/custom.js"></script>
 <script>
-    var currentPage=1;
-    var maxPages=1;
+    //为了跳转页面方便,设置全局变量保存当前页和最大页码数
+    var currentPage=1;//当前页码
+    var maxPages=1;//最大页码
 
-    $(function () {
-        //为了跳转页面方便,设置全局变量保存当前页和最大页码数
-
-
+    $(document).ready(function () {
         //页面加载时向远端获取所有数据,页面定位在第1页
-        // gotoPage(1,3);
         gotoPage();
-
         //页面加载时给全选和反选按钮绑定事件
         mulCheck();
         //给查询按钮绑定事件
@@ -234,7 +228,7 @@
         //给每条记录的删除按钮添加事件
         $(document).on("click", ".delBtn", deleteSingleRecord);
         //给需要点击之后上传图片的区域添加点击事件,确保能够调用文件域的点击事件
-        $('[data-my="disAvatar"]').click(function (eve) {$('[data-my="inputAvatar"]').click();});
+        $('[data-my="disAvatar"]').click(function (eve) {$(eve.target).next('[type="file"]').click();});
         $('[data-my="inputAvatar"]').change(choiceAvatar);
     });
 
@@ -242,14 +236,17 @@
 
     //文件域的值发生改变,将图片改变
     function choiceAvatar(e){
+        var eve = e;//传递过来的元素因为会被在传递的链条中更改,所以暂存一下
         var reader = new FileReader();
         reader.onload = (function () {
             return function (e) {
-                $('[data-my="disAvatar"]').attr('src',this.result);
+                //修改显示图片,因为采用了相邻选择器,所以一定要注意HTML元素中对应的位置
+                $(eve.target).prev('img').attr('src',this.result);
             }
         })(e.target.files[0]);
         reader.readAsDataURL(e.target.files[0]);
     };
+
 
     //获取外键对应主键表中的相关字段并填写到下拉列表中
     function getAndFill(url,comp,valueName,disName,choice){
@@ -262,6 +259,7 @@
             success:function(res){
                 $.each(res.dataZone.lists,function(index,item){
                     if(choice==valueName){
+                        //如果传递了默认的被选中项,则使用selected属性使之默认选中,此代码适用于datalist和select组件
                         comp.append('<option selected="selected" value="'+item[valueName]+'">'+item[disName]+'</option>');
                     }else{
                         comp.append('<option value="'+item[valueName]+'">'+item[disName]+'</option>');
@@ -273,7 +271,7 @@
     }
 
 
-
+    //搜索功能的实现
     function search() {
         //修改数据之前先进行数据校验
         //校验通过向服务器发送请求
@@ -300,8 +298,7 @@
 
         //打开模态框
         $("#updateModal").modal({backdrop: "static"});
-
-        //将表单中原有数据清空
+        //将表单中原有数据清空,包括数据区内容
         $("#updateModal form").get(0).reset();
         //从服务器获取信息填入修改表单中
         $.ajax({
@@ -337,14 +334,15 @@
         //修改数据之前先进行数据校验
         //校验通过向服务器发送请求
         var formData = new FormData($("#updateModal form").get(0));
-        formData.append("_method", 'put');
+
         $.ajax({
             url: "${app}/goodsrest/opt",
-            type: "PUT",
+            type: "PUT",  //已经更改为可以通过post或者put方式更新图片
             data: formData,
             dataType:"json",
-            contentType:'multipart/form-data; charset=utf-8',//此处对应head处的文档声明
+            contentType:false,//此处对应head处的文档声明
             processData:false,//取消默认的预处理行为
+            enctype: "multipart/form-data",//指定封装的类型
             success: function (result) {
                 $("#updateModal").modal("hide");//关闭模态框
                 gotoPage(currentPage);//回到当前页面
@@ -364,10 +362,11 @@
         //填充列表
         getAndFill("${app}/business/listJSON",$("#blist"),"bid","bname");
         getAndFill("${app}/types/listJSON",$("#tlist"),"tid","tname");
-        //将表单中原有数据清空
+        //将表单中原有数据清空,包括默认的图片缓存内容
+        $('#addModal [data-my="disAvatar"]').attr('src','/upload/null.png');
         $("#addModal form").get(0).reset();
     }
-
+    //添加指定对象的操作
     function addObj() {
         //添加数据之前先进行数据校验
         //校验通过向服务器发送请求
@@ -393,6 +392,7 @@
         });
     }
 
+    //删除单条记录
     function deleteSingleRecord(ele) {
         //询问是否删除
         if (!confirm("真的删除"))
@@ -411,6 +411,7 @@
         return false;
     }
 
+    //删除多条记录
     function deleteMuliRecord() {
         //点击删除所选按钮时删除多条记录
 
@@ -440,6 +441,7 @@
         }
     }
 
+    //跳转到指定页码
     function gotoPage(pageNum, pageSize) {
         pageNum = pageNum == null ? 1 : pageNum;
         pageSize = pageSize == null ? 10 : pageSize;
@@ -461,7 +463,7 @@
             }
         });
     }
-
+    //解析数据并渲染
     function parseDataAndShow(result) {
         $("#objTable tbody").empty();
         // 获取数据集合
@@ -491,7 +493,7 @@
             $("#objTable tbody").append(uTr);
         });
     }
-
+    //解析页码并渲染
     function parsePageAndShow(result) {
         //因为是不跨页面的刷新操作,所以操作前先清空当前节点内容
         $("#pageTips").empty();
@@ -552,7 +554,7 @@
         $(".pagination .disabled,.pagination .active").off("click");
 
     }
-
+    //多选按钮组的操作
     function mulCheck() {
         //全选和反选的操作
         $("#choiceToggle").click(function () {
@@ -562,6 +564,7 @@
         //选中所有子项全选被选中
         //因为通过ajax动态生成该复选框组件,所以以前写的绑定代码不能使用
         //通过dom加载的元素绑定事件使用on方法,不了解看第2天的视频
+        //通过事件委托的方式实现绑定(首先需要理解事件冒泡的概念)
         $(document).on("click", function () {
             var flag = true;
             $("[name=choiceList]:checkbox").each(function () {
@@ -571,15 +574,7 @@
             });
             $("#choiceToggle").prop("checked", flag);
         });
-        // $("[name=choiceList]:checkbox").click(function () {
-        //     var flag = true;
-        //     $("[name=choiceList]:checkbox").each(function () {
-        //         if (!this.checked) {
-        //             flag = false;
-        //         }
-        //     });
-        //     $("#choiceToggle").prop("checked", flag);
-        // });
+
         //反选操作
         $("#reverseBtn").click(function () {
             $("[name=choiceList]:checkbox").each(function () {
@@ -590,12 +585,11 @@
 
     //完成后弹出消息框
     function alertTips(message,alert_type){
-
         $('.alert').html(message).removeAttr("class").addClass(alert_type).show().delay(1000).fadeOut();
     }
 
 
-    //日期转换
+    //日期转换,基于原型的设计方式,可以确保按照自己定义的类型方式进行展示
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
             "M+": this.getMonth() + 1, // 月份
@@ -616,7 +610,7 @@
                     : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     };
-
+    //解析不同格式日期的模式
     function parseISO8601(dateStringInRange) {
         var isoExp = /^\s*(\d{4})-(\d\d)-(\d\d)\s(\d\d):(\d\d)\s*$/, date = new Date(
             NaN), month, hour, min, parts = isoExp.exec(dateStringInRange);
@@ -633,7 +627,7 @@
         }
         return date;
     }
-
+    //基于日期类型的判断
     function isValidDate(d) {
         if (Object.prototype.toString.call(d) !== "[object Date]")
             return false;
