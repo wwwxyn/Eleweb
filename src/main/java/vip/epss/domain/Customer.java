@@ -15,18 +15,20 @@ public class Customer implements Serializable {
     private String cphone;
     private String cemail;
     private String cpass;
+    private String caddress;
     private Date cbirth;
     private String cavatar;
     private Boolean cgender;
     private Boolean cstatus;
     private Date addTime;
 
-    public Customer(Integer cid, String cname, String cphone, String cemail, String cpass, Date cbirth, String cavatar, Boolean cgender, Boolean cstatus, Date addTime) {
+    public Customer(Integer cid, String cname, String cphone, String cemail, String cpass, String caddress, Date cbirth, String cavatar, Boolean cgender, Boolean cstatus, Date addTime) {
         this.cid = cid;
         this.cname = cname;
         this.cphone = cphone;
         this.cemail = cemail;
         this.cpass = cpass;
+        this.caddress = caddress;
         this.cbirth = cbirth;
         this.cavatar = cavatar;
         this.cgender = cgender;
@@ -35,6 +37,14 @@ public class Customer implements Serializable {
     }
 
     public Customer() {
+    }
+
+    public String getCaddress() {
+        return caddress;
+    }
+
+    public void setCaddress(String caddress) {
+        this.caddress = caddress;
     }
 
     public Integer getCid() {

@@ -17,12 +17,12 @@ public class LoginInterceptor implements HandlerInterceptor {
         //首先应该获取当前的地址
         String uri = request.getRequestURI();
         //如果用户访问的地址是无需验证的页面,则放行
-        if (uri.indexOf("/user/login") >= 0) {
+        if (uri.indexOf("/user/login") >= 0 || uri.indexOf("/user/loginCheck") >= 0) {
             return true;//放行
         }
 
         HttpSession session = request.getSession();
-        String username = (String)session.getAttribute("USER_SESSION");
+        String username = (String) session.getAttribute("USER_SESSION");
         if (username != null && username != "") {
             return true;//用户已经登录则放行
         }

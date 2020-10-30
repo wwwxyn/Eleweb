@@ -42,43 +42,62 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">添加新商品</h4>
+                <h4 class="modal-title">添加新用户</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- 模态框主体 -->
             <div class="modal-body">
-                <form action="${app}/goodsrest/opt" enctype="multipart/form-data" class="form-horizontal" role="form">
+                <form action="${app}/customerrest/opt" enctype="multipart/form-data" class="form-horizontal"
+                      role="form">
                     <%--input type="hidden" name="_method" value="POST" /--%>
                     <div class="form-group">
-                        <label>gname:</label><input type="text" class="form-control" name="gname"
-                                                    placeholder="请输入商品名称"/>
+                        <label>cname:</label><input type="text" class="form-control" name="cname"/>
                     </div>
                     <div class="form-group">
-                        <label>gdes:</label><textarea class="form-control" name="gdes" placeholder="商品描述"></textarea>
+                        <label>cphone:</label><input type="text" class="form-control" name="cphone"/>
                     </div>
                     <div class="form-group">
-                        <label>gprice:</label><input type="text" class="form-control" name="gprice" placeholder="商品价格"/>
+                        <label>cemail:</label><input type="email" class="form-control" name="cemail"/>
                     </div>
                     <div class="form-group">
-                        <label>gavatar:</label>
+                        <label>cpass:</label><input type="text" class="form-control" name="cpass"/>
+                    </div>
+                    <div class="form-group">
+                        <label>caddress:</label><textarea class="form-control" name="caddress"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>cbirth:</label><input type="date" class="form-control" name="cbirth"/>
+                    </div>
+                    <div class="form-group">
+                        <label>cavatar:</label>
                         <img data-my="disAvatar" src="" style="width: 100px;height: 100px;"/>
                         <input style="display: none;" type="file" class="form-control" data-my="inputAvatar"
                                name="file"/>
                     </div>
                     <div class="form-group">
-                        <label>fbid:</label><input list="blist" type="text" class="form-control" name="fbid"
-                                                   placeholder="所属商户"/>
-                        <datalist id="blist">
-                        </datalist>
+                        <label>cgender: </label>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" value="1" name="cgender"/> 男
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" checked="checked" type="radio" value="0"
+                                       name="cgender"/> 女
+                            </label>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>ftid:</label><input list="tlist" type="text" class="form-control" name="ftid"
-                                                   placeholder="所属类别"/>
-                        <datalist id="tlist" class="custom-select-sm">
-                        </datalist>
+                        <label>cstatus: </label>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" class="form-control" value="1"
+                                       name="cstatus"/>是否禁用该用户
+                            </label>
+                        </div>
                     </div>
-
                     <div class="form-group">
                         <button id="addObjBtn" type="button" class="btn btn-block btn-primary">添加</button>
                     </div>
@@ -102,42 +121,57 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
-                <form action="${app}/goodsrest/opt" enctype="multipart/form-data" class="form-horizontal" role="form">
+                <form action="${app}/customerrest/opt" enctype="multipart/form-data" class="form-horizontal"
+                      role="form">
                     <div class="form-group">
-                        <label>gid:</label><input readonly="readonly" type="text" class="form-control" name="gid"
-                                                  placeholder="请输入商品id"/>
+                        <label>cid:</label><input readonly="readonly" type="text" class="form-control" name="cid"/>
                     </div>
                     <div class="form-group">
-                        <label>gname:</label><input type="text" class="form-control" name="gname"
-                                                    placeholder="请输入商品名称"/>
+                        <label>cname:</label><input type="text" class="form-control" name="cname"/>
                     </div>
                     <div class="form-group">
-                        <label>gdes:</label><textarea class="form-control" name="gdes" placeholder="商品描述"></textarea>
+                        <label>cphone:</label><input type="text" class="form-control" name="cphone"/>
                     </div>
                     <div class="form-group">
-                        <label>gprice:</label><input type="text" class="form-control" name="gprice" placeholder="商品价格"/>
+                        <label>cemail:</label><input type="email" class="form-control" name="cemail"/>
                     </div>
                     <div class="form-group">
-                        <label>addTime:</label><input type="datetime" class="form-control" name="addTime"
-                                                      placeholder="添加时间"/>
+                        <label>cpass:</label><input type="text" class="form-control" name="cpass"/>
                     </div>
                     <div class="form-group">
-                        <label>gavatar:</label>
+                        <label>caddress:</label><textarea class="form-control" name="caddress"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>cbirth:</label><input type="date" class="form-control" name="cbirth"/>
+                    </div>
+                    <div class="form-group">
+                        <label>cavatar:</label>
                         <img data-my="disAvatar" src="" style="width: 100px;height: 100px;"/>
                         <input style="display: none;" type="file" class="form-control" data-my="inputAvatar"
                                name="file"/>
                     </div>
                     <div class="form-group">
-                        <label>fbid:</label><input list="ublist" type="text" class="form-control" name="fbid"
-                                                   placeholder="所属商户"/>
-                        <datalist id="ublist">
-                        </datalist>
+                        <label>cgender: </label>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" value="1" name="cgender"/> 男
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" checked="checked" type="radio" value="0"
+                                       name="cgender"/> 女
+                            </label>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>ftid:</label><input list="utlist" type="text" class="form-control" name="ftid"
-                                                   placeholder="所属类别"/>
-                        <datalist id="utlist">
-                        </datalist>
+                        <label>cstatus: </label>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" class="form-control" value="1"
+                                       name="cstatus"/>是否禁用该用户
+                            </label>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -154,12 +188,8 @@
 </div>
 
 
-<form id="searchForm" method="get" action="${app}/goodsrest/list">
-
-    <input name="gid" type="text" value="" placeholder="gid"/>
-    <input type="text" placeholder="gname" name="gname" value=""/>
-    <input type="text" name="minPrice" value="0.00"/>
-    <input type="text" name="maxPrice" value="999.99"/>
+<form id="searchForm" method="get" action="${app}/customerrest/list">
+    <input type="text" placeholder="cname" name="cname" value=""/>
     <input type="date" name="startDate" value="2020-10-01"/>
     <input type="date" name="endDate" value="2020-11-12"/>
     <input class="btn btn-secondary" type="button" id="searchCleanBtn" value="清除条件"/>
@@ -169,7 +199,7 @@
     <!-- 按钮：用于打开模态框 -->
     <button id="openAddModalBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">新增
     </button>
-    <input class="btn btn-danger" type="button" action="${app}/goodsrest/opt" id="deletesBtn" value="删除所选"/>
+    <input class="btn btn-danger" type="button" action="${app}/customerrest/opt" id="deletesBtn" value="删除所选"/>
 </div>
 <table id="objTable" class="table table-striped table-bordered table-hover">
     <thead>
@@ -179,13 +209,16 @@
             <input class="btn btn-sm btn-warning" type="button" id="reverseBtn" value="反选"/>
         </th>
         <th>序号#</th>
-        <th>商品id(gid)</th>
-        <th>名称(gname)</th>
-        <th>描述(gdes)</th>
-        <th>价格(gprice)</th>
-        <th>照片(gavatar)</th>
-        <th>所属商户(fbid)</th>
-        <th>所属种类(ftid)</th>
+        <th>客户id</th>
+        <th>姓名</th>
+        <th>电话</th>
+        <th>邮箱</th>
+        <th>密码</th>
+        <th>地址</th>
+        <th>生日</th>
+        <th>头像</th>
+        <th>性别</th>
+        <th>状态</th>
         <th>创建时间(addTime)</th>
         <th>操作(修改)</th>
         <th>操作(删除)</th>
@@ -246,49 +279,44 @@
         $('[data-my="inputAvatar"]').change(choiceAvatar);
     });
 
-    //页面专用的代码从这里开始
-
-    $("#openAddModalBtn").click(function () {
-        getAndFill("${app}/businessrest/listJSON", $('#addModal [id="blist"]'), "bid", "bname");
-        getAndFill("${app}/typesrest/listJSON", $('#addModal [id="tlist"]'), "tid", "tname");
-    });
-
-
     //修改信息时从远端获取数据并填入表单
-    function updateForm(ele) {
-        //声明变量用以接收原始值,主要用于填写下拉列表
-        var choice1;
-        var choice2;
-
+    function updateForm(eve) {
         //打开模态框
         $("#updateModal").modal({backdrop: "static"});
         //将表单中原有数据清空,包括数据区内容
         $("#updateModal form").get(0).reset();
         //从服务器获取信息填入修改表单中
         $.ajax({
-            url: ele.target.href,
+            url: eve.target.href,
             type: "GET",
             success: function (result) {
                 //回填数据
-                $('#updateModal [name="gid"]').val(result.dataZone.obj.gid);
-                $('#updateModal [name="gname"]').val(result.dataZone.obj.gname);
-                $('#updateModal [name="gdes"]').val(result.dataZone.obj.gdes);
-                $('#updateModal [name="gprice"]').val(result.dataZone.obj.gprice);
-                $('#updateModal [data-my="disAvatar"]').attr('src', result.dataZone.obj.gavatar == '' ? '/upload/null.png' : result.dataZone.obj.gavatar);
-                $('#updateModal [name="fbid"]').val(result.dataZone.obj.fbid);
-                choice1 = result.dataZone.obj.fbid;
-                $('#updateModal [name="ftid"]').val(result.dataZone.obj.ftid);
-                choice2 = result.dataZone.obj.ftid;
-                $('#updateModal [name="addTime"]').val(new Date(result.dataZone.obj.addTime).Format("yyyy-MM-dd"));
+                $('#updateModal [name="cid"]').val(result.dataZone.obj.cid);
+                $('#updateModal [name="cname"]').val(result.dataZone.obj.cname);
+                $('#updateModal [name="cphone"]').val(result.dataZone.obj.cphone);
+                $('#updateModal [name="cemail"]').val(result.dataZone.obj.cemail);
+                $('#updateModal [name="cpass"]').val(result.dataZone.obj.cpass);
+                $('#updateModal [name="caddress"]').val(result.dataZone.obj.caddress);
+                $('#updateModal [name="cbirth"]').val(new Date(result.dataZone.obj.cbirth).Format("yyyy-MM-dd"));
+                $('#updateModal [data-my="disAvatar"]').attr('src', result.dataZone.obj.cavatar == '' ? '/upload/null.png' : result.dataZone.obj.cavatar);
+                //单选框的处理方式,注释留下供同学们参考
+                // console.log("单选框的个数"+$('#updateModal [name="cgender"]').length);//2
+                // console.log("服务器返回被选中的单选是"+result.dataZone.obj.cgender);//true或false
+                //遍历整个单选列表
+                $('#updateModal [name="cgender"]').each(function () {
+                    // console.log("当前单选框的值"+$(this).val());//1或者0
+                    if ($(this).val() == result.dataZone.obj.cgender) {
+                        $(this).prop('checked', 'true');//和服务器匹配的选项默认设置为选中
+                    }
+                });
+                // 复选框的处理方式
+                $('#updateModal [name="cstatus"]').prop('checked', result.dataZone.obj.cstatus);
+                $('#updateModal [name="addTime"]').val(new Date(result.dataZone.obj.addTime).Format("yyyy-MM-dd HH:mm:ss"));
 
             },
             error: function () {
             }
         });
-
-        //填充列表
-        getAndFill("${app}/businessrest/listJSON", $('#updateModal [id="ublist"]'), "bid", "bname", choice1);
-        getAndFill("${app}/typesrest/listJSON", $('#updateModal [id="utlist"]'), "tid", "tname", choice2);
 
         return false;//取消超链接的默认跳转
     }
@@ -302,28 +330,32 @@
             //构建行
             var uTr = $("<tr></tr>");
             //构建多个单元格
-            var checkboxTh = $('<th><input type="checkbox" name="choiceList" value="${item.gid}"/></th>');
+            var checkboxTh = $('<th><input type="checkbox" name="choiceList" value="${item.cid}"/></th>');
             var countTh = $('<th></th>').text(index + 1);
-            var td1 = $('<td></td>').text(item.gid);
-            var td2 = $('<td></td>').text(item.gname);
-            var td3 = $('<td></td>').text(item.gdes);
-            var td4 = $('<td></td>').text(item.gprice.toFixed(2));
-            var td5 = $('<td></td>').text(item.gavatar);
-            var td6 = $('<td></td>').text(item.business.bname);
-            var td7 = $('<td></td>').text(item.types.tname);
+            var td1 = $('<td></td>').text(item.cid);
+            var td2 = $('<td></td>').text(item.cname);
+            var td3 = $('<td></td>').text(item.cphone);
+            var td4 = $('<td></td>').text(item.cemail);
+            var td5 = $('<td></td>').text(item.cpass);
+            var td6 = $('<td></td>').text(item.caddress);
+            var td7 = $('<td></td>').text(new Date(item.cbirth).Format("yyyy-MM-dd"));
+            var td8 = $('<td></td>').text(item.cavatar);
+            //如果显示布尔值,建议使用三元表达式快速处理
+            var td9 = $('<td></td>').text(item.cgender == true ? '男' : '女');
+            var td10 = $('<td></td>').text(item.cstatus == true ? '禁用' : '启用');
             var addTimeTd = $('<td></td>').text(new Date(item.addTime).Format("yyyy-MM-dd HH:mm:ss"));
-            var upBtnTd = $('<td></td>').html('<a class="upBtn btn btn-info btn-sm" href="${app}/goodsrest/opt/' + item.gid + '">修改</a>');
-            var delBtnTd = $('<td></td>').html('<a class="delBtn btn btn-danger btn-sm" href="${app}/goodsrest/opt/' + item.gid + '">删除</a>');
+            var upBtnTd = $('<td></td>').html('<a class="upBtn btn btn-info btn-sm" href="${app}/customerrest/opt/' + item.cid + '">修改</a>');
+            var delBtnTd = $('<td></td>').html('<a class="delBtn btn btn-danger btn-sm" href="${app}/customerrest/opt/' + item.cid + '">删除</a>');
             //将单元格追加到行中
             uTr.append(checkboxTh).append(countTh)
-                .append(td1).append(td2).append(td3).append(td4).append(td5).append(td6).append(td7)
+                .append(td1).append(td2).append(td3).append(td4).append(td5)
+                .append(td6).append(td7).append(td8).append(td9).append(td10)
                 .append(addTimeTd)
                 .append(upBtnTd).append(delBtnTd);
             // 将行追加到表体中
             $("#objTable tbody").append(uTr);
         });
     }
-
 </script>
 </body>
 </html>

@@ -17,6 +17,7 @@
     <title>后台管理</title>
     <meta charset="UTF-8"/>
     <base target="_self"/>
+
     <meta http-equiv="Content-Type" ; content="multipart/form-data; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- 引入 Bootstrap -->
@@ -41,26 +42,26 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">添加新用户</h4>
+                <h4 class="modal-title">添加新商品</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- 模态框主体 -->
             <div class="modal-body">
-                <form action="${app}/userrest/opt" class="form-horizontal" role="form">
+                <form action="${app}/typesrest/opt" enctype="multipart/form-data" class="form-horizontal" role="form">
                     <%--input type="hidden" name="_method" value="POST" /--%>
                     <div class="form-group">
-                        <label>username:</label>
-                        <input type="text" class="form-control" name="username"
-                               placeholder="请输入用户姓名"/>
+                        <label>tname:</label><input type="text" class="form-control" name="tname"/>
                     </div>
-                    <div id="usernameTips"></div>
                     <div class="form-group">
-                        <label>password:</label>
-                        <input type="password" class="form-control" name="password"
-                               placeholder="请输入密码">
+                        <label>tdes:</label><textarea class="form-control" name="tdes"></textarea>
                     </div>
-
+                    <div class="form-group">
+                        <label>tavatar:</label>
+                        <img data-my="disAvatar" src="" style="width: 100px;height: 100px;"/>
+                        <input style="display: none;" type="file" class="form-control" data-my="inputAvatar"
+                               name="file"/>
+                    </div>
                     <div class="form-group">
                         <button id="addObjBtn" type="button" class="btn btn-block btn-primary">添加</button>
                     </div>
@@ -84,23 +85,25 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
-                <form action="${app}/userrest/opt" class="form-horizontal" role="form">
-                    <input type="hidden" name="_method" value="PUT"/>
+                <form action="${app}/typesrest/opt" enctype="multipart/form-data" class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label>uid:</label>
-                        <input type="text" readonly="readonly" class="form-control" name="uid"
-                               placeholder="uid"/>
+                        <label>tid:</label><input readonly="readonly" type="text" class="form-control" name="tid"/>
                     </div>
                     <div class="form-group">
-                        <label>姓名username:</label>
-                        <input type="text" readonly="readonly" class="form-control"
-                               name="username"
-                               placeholder="请输入用户姓名"/>
+                        <label>tname:</label><input type="text" class="form-control" name="tname"/>
                     </div>
                     <div class="form-group">
-                        <label>密码password:</label>
-                        <input type="password" class="form-control" name="password"
-                               placeholder="请输入新密码">
+                        <label>tdes:</label><textarea class="form-control" name="tdes"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>addTime:</label><input type="datetime" class="form-control" name="addTime"
+                                                      placeholder="添加时间"/>
+                    </div>
+                    <div class="form-group">
+                        <label>tavatar:</label>
+                        <img data-my="disAvatar" src="" style="width: 100px;height: 100px;"/>
+                        <input style="display: none;" type="file" class="form-control" data-my="inputAvatar"
+                               name="file"/>
                     </div>
 
                     <div class="form-group">
@@ -117,16 +120,8 @@
 </div>
 
 
-<form id="searchForm" method="get" action="${app}/userrest/list">
-    <select id="uidList" name="uidCondition">
-        <option selected="selected" value="-1">不限uid</option>
-        <option value="0">uid大于</option>
-        <option value="1">uid等于</option>
-        <option value="2">uid小于</option>
-    </select>
-
-    <input name="uid" type="text" value="" placeholder="uid"/>
-    <input type="text" placeholder="username" name="username" value=""/>
+<form id="searchForm" method="get" action="${app}/typesrest/list">
+    <input type="text" placeholder="tname" name="tname" value=""/>
     <input type="date" name="startDate" value="2020-10-01"/>
     <input type="date" name="endDate" value="2020-11-12"/>
     <input class="btn btn-secondary" type="button" id="searchCleanBtn" value="清除条件"/>
@@ -136,7 +131,7 @@
     <!-- 按钮：用于打开模态框 -->
     <button id="openAddModalBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">新增
     </button>
-    <input class="btn btn-danger" type="button" action="${app}/userrest/opt" id="deletesBtn" value="删除所选"/>
+    <input class="btn btn-danger" type="button" action="${app}/typesrest/opt" id="deletesBtn" value="删除所选"/>
 </div>
 <table id="objTable" class="table table-striped table-bordered table-hover">
     <thead>
@@ -146,9 +141,10 @@
             <input class="btn btn-sm btn-warning" type="button" id="reverseBtn" value="反选"/>
         </th>
         <th>序号#</th>
-        <th>用户id(uid)</th>
-        <th>姓名(username)</th>
-        <th>密码(password)</th>
+        <th>类别id</th>
+        <th>名称</th>
+        <th>描述</th>
+        <th>照片</th>
         <th>创建时间(addTime)</th>
         <th>操作(修改)</th>
         <th>操作(删除)</th>
@@ -210,19 +206,21 @@
     });
 
     //修改信息时从远端获取数据并填入表单
-    function updateForm(eve) {
+    function updateForm(ele) {
         //打开模态框
         $("#updateModal").modal({backdrop: "static"});
-        //将表单中原有数据清空
+        //将表单中原有数据清空,包括数据区内容
         $("#updateModal form").get(0).reset();
         //从服务器获取信息填入修改表单中
         $.ajax({
-            url: eve.target.href,
+            url: ele.target.href,
             type: "GET",
             success: function (result) {
                 //回填数据
-                $('#updateModal [name="uid"]').val(result.dataZone.obj.uid);
-                $('#updateModal [name="username"]').val(result.dataZone.obj.username);
+                $('#updateModal [name="tid"]').val(result.dataZone.obj.tid);
+                $('#updateModal [name="tname"]').val(result.dataZone.obj.tname);
+                $('#updateModal [name="tdes"]').val(result.dataZone.obj.tdes);
+                $('#updateModal [data-my="disAvatar"]').attr('src', result.dataZone.obj.tavatar == '' ? '/upload/null.png' : result.dataZone.obj.tavatar);
                 $('#updateModal [name="addTime"]').val(new Date(result.dataZone.obj.addTime).Format("yyyy-MM-dd"));
 
             },
@@ -233,26 +231,29 @@
         return false;//取消超链接的默认跳转
     }
 
+
     //解析数据并渲染
     function parseDataAndShow(result) {
         $("#objTable tbody").empty();
         // 获取数据集合
-        let users = result.dataZone.pageInfo.list;
-        $.each(users, function (index, item) {
+        let lists = result.dataZone.pageInfo.list;
+        $.each(lists, function (index, item) {
             //构建行
             var uTr = $("<tr></tr>");
             //构建多个单元格
-            var checkboxTh = $('<th><input type="checkbox" name="choiceList" value="${item.uid}"/></th>');
+            var checkboxTh = $('<th><input type="checkbox" name="choiceList" value="${item.tid}"/></th>');
             var countTh = $('<th></th>').text(index + 1);
-            var uidTd = $('<td></td>').text(item.uid);
-            var usernameTd = $('<td></td>').text(item.username);
-            var passwordTd = $('<td></td>').text(item.password);
+            var td1 = $('<td></td>').text(item.tid);
+            var td2 = $('<td></td>').text(item.tname);
+            var td3 = $('<td></td>').text(item.tdes);
+            var td5 = $('<td></td>').text(item.tavatar);
             var addTimeTd = $('<td></td>').text(new Date(item.addTime).Format("yyyy-MM-dd HH:mm:ss"));
-            var upBtnTd = $('<td></td>').html('<a class="upBtn btn btn-info btn-sm" href="${app}/userrest/opt/' + item.uid + '">修改</a>');
-            var delBtnTd = $('<td></td>').html('<a class="delBtn btn btn-danger btn-sm" href="${app}/userrest/opt/' + item.uid + '">删除</a>');
+            var upBtnTd = $('<td></td>').html('<a class="upBtn btn btn-info btn-sm" href="${app}/typesrest/opt/' + item.tid + '">修改</a>');
+            var delBtnTd = $('<td></td>').html('<a class="delBtn btn btn-danger btn-sm" href="${app}/typesrest/opt/' + item.tid + '">删除</a>');
             //将单元格追加到行中
-            uTr.append(checkboxTh).append(countTh).append(uidTd)
-                .append(usernameTd).append(passwordTd).append(addTimeTd)
+            uTr.append(checkboxTh).append(countTh)
+                .append(td1).append(td2).append(td3).append(td5)
+                .append(addTimeTd)
                 .append(upBtnTd).append(delBtnTd);
             // 将行追加到表体中
             $("#objTable tbody").append(uTr);

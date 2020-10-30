@@ -42,43 +42,50 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">添加新商品</h4>
+                <h4 class="modal-title">添加新商户</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- 模态框主体 -->
             <div class="modal-body">
-                <form action="${app}/goodsrest/opt" enctype="multipart/form-data" class="form-horizontal" role="form">
-                    <%--input type="hidden" name="_method" value="POST" /--%>
-                    <div class="form-group">
-                        <label>gname:</label><input type="text" class="form-control" name="gname"
-                                                    placeholder="请输入商品名称"/>
-                    </div>
-                    <div class="form-group">
-                        <label>gdes:</label><textarea class="form-control" name="gdes" placeholder="商品描述"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>gprice:</label><input type="text" class="form-control" name="gprice" placeholder="商品价格"/>
-                    </div>
-                    <div class="form-group">
-                        <label>gavatar:</label>
-                        <img data-my="disAvatar" src="" style="width: 100px;height: 100px;"/>
-                        <input style="display: none;" type="file" class="form-control" data-my="inputAvatar"
-                               name="file"/>
-                    </div>
-                    <div class="form-group">
-                        <label>fbid:</label><input list="blist" type="text" class="form-control" name="fbid"
-                                                   placeholder="所属商户"/>
-                        <datalist id="blist">
-                        </datalist>
-                    </div>
-                    <div class="form-group">
-                        <label>ftid:</label><input list="tlist" type="text" class="form-control" name="ftid"
-                                                   placeholder="所属类别"/>
-                        <datalist id="tlist" class="custom-select-sm">
-                        </datalist>
-                    </div>
-
+                <form action="${app}/businessrest/opt" enctype="multipart/form-data" class="form-horizontal"
+                      role="form">
+                        <div class="form-group">
+                            <label>bname:</label><input type="text" class="form-control" name="bname"/>
+                        </div>
+                        <div class="form-group">
+                            <label>bpass:</label><input type="text" class="form-control" name="bpass"/>
+                        </div>
+                        <div class="form-group">
+                            <label>bdes:</label><textarea type="text" class="form-control" name="bdes"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>bdelivery:</label><input type="text" class="form-control" name="bdelivery"/>
+                        </div>
+                        <div class="form-group">
+                            <label>bmark:</label><input type="range" min="0" max="5" step="1" class="form-control" name="bmark"/>
+                        </div>
+                        <div class="form-group">
+                            <label>bavatar:</label>
+                            <img data-my="disAvatar" src="" style="width: 100px;height: 100px;"/>
+                            <input style="display: none;" type="file" class="form-control" data-my="inputAvatar"
+                                   name="file"/>
+                        </div>
+                        <div class="form-group">
+                            <label>baddress:</label><textarea class="form-control" name="baddress"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>brecommendation:</label><input type="range" min="0" max="100" step="1" class="form-control" name="brecommendation"/>
+                        </div>
+                        <div class="form-group">
+                            <label>bstatus: </label>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" class="form-control" value="1"
+                                           name="bstatus"/>是否禁用该商户
+                                </label>
+                            </div>
+                        </div>
                     <div class="form-group">
                         <button id="addObjBtn" type="button" class="btn btn-block btn-primary">添加</button>
                     </div>
@@ -102,42 +109,46 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
-                <form action="${app}/goodsrest/opt" enctype="multipart/form-data" class="form-horizontal" role="form">
+                <form action="${app}/businessrest/opt" enctype="multipart/form-data" class="form-horizontal"
+                      role="form">
                     <div class="form-group">
-                        <label>gid:</label><input readonly="readonly" type="text" class="form-control" name="gid"
-                                                  placeholder="请输入商品id"/>
+                        <label>bid:</label><input readonly="readonly" type="text" class="form-control" name="bid"/>
                     </div>
                     <div class="form-group">
-                        <label>gname:</label><input type="text" class="form-control" name="gname"
-                                                    placeholder="请输入商品名称"/>
+                        <label>bname:</label><input type="text" class="form-control" name="bname"/>
                     </div>
                     <div class="form-group">
-                        <label>gdes:</label><textarea class="form-control" name="gdes" placeholder="商品描述"></textarea>
+                        <label>bpass:</label><input type="text" class="form-control" name="bpass"/>
                     </div>
                     <div class="form-group">
-                        <label>gprice:</label><input type="text" class="form-control" name="gprice" placeholder="商品价格"/>
+                        <label>bdes:</label><textarea type="text" class="form-control" name="bdes"></textarea>
                     </div>
                     <div class="form-group">
-                        <label>addTime:</label><input type="datetime" class="form-control" name="addTime"
-                                                      placeholder="添加时间"/>
+                        <label>bdelivery:</label><input type="text" class="form-control" name="bdelivery"/>
                     </div>
                     <div class="form-group">
-                        <label>gavatar:</label>
+                        <label>bmark:</label><input type="range" min="0" max="5" step="1" class="form-control" name="bmark"/>
+                    </div>
+                    <div class="form-group">
+                        <label>bavatar:</label>
                         <img data-my="disAvatar" src="" style="width: 100px;height: 100px;"/>
                         <input style="display: none;" type="file" class="form-control" data-my="inputAvatar"
                                name="file"/>
                     </div>
                     <div class="form-group">
-                        <label>fbid:</label><input list="ublist" type="text" class="form-control" name="fbid"
-                                                   placeholder="所属商户"/>
-                        <datalist id="ublist">
-                        </datalist>
+                        <label>baddress:</label><textarea class="form-control" name="baddress"></textarea>
                     </div>
                     <div class="form-group">
-                        <label>ftid:</label><input list="utlist" type="text" class="form-control" name="ftid"
-                                                   placeholder="所属类别"/>
-                        <datalist id="utlist">
-                        </datalist>
+                        <label>brecommendation:</label><input type="range" min="0" max="100" step="1" class="form-control" name="brecommendation"/>
+                    </div>
+                    <div class="form-group">
+                        <label>bstatus: </label>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" class="form-control" value="1"
+                                       name="bstatus"/>是否禁用该商户
+                            </label>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -154,12 +165,8 @@
 </div>
 
 
-<form id="searchForm" method="get" action="${app}/goodsrest/list">
-
-    <input name="gid" type="text" value="" placeholder="gid"/>
-    <input type="text" placeholder="gname" name="gname" value=""/>
-    <input type="text" name="minPrice" value="0.00"/>
-    <input type="text" name="maxPrice" value="999.99"/>
+<form id="searchForm" method="get" action="${app}/businessrest/list">
+    <input type="text" placeholder="bname" name="bname" value=""/>
     <input type="date" name="startDate" value="2020-10-01"/>
     <input type="date" name="endDate" value="2020-11-12"/>
     <input class="btn btn-secondary" type="button" id="searchCleanBtn" value="清除条件"/>
@@ -169,7 +176,7 @@
     <!-- 按钮：用于打开模态框 -->
     <button id="openAddModalBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">新增
     </button>
-    <input class="btn btn-danger" type="button" action="${app}/goodsrest/opt" id="deletesBtn" value="删除所选"/>
+    <input class="btn btn-danger" type="button" action="${app}/businessrest/opt" id="deletesBtn" value="删除所选"/>
 </div>
 <table id="objTable" class="table table-striped table-bordered table-hover">
     <thead>
@@ -179,13 +186,16 @@
             <input class="btn btn-sm btn-warning" type="button" id="reverseBtn" value="反选"/>
         </th>
         <th>序号#</th>
-        <th>商品id(gid)</th>
-        <th>名称(gname)</th>
-        <th>描述(gdes)</th>
-        <th>价格(gprice)</th>
-        <th>照片(gavatar)</th>
-        <th>所属商户(fbid)</th>
-        <th>所属种类(ftid)</th>
+        <th>商户id</th>
+        <th>名称</th>
+        <th>密码</th>
+        <th>描述</th>
+        <th>配送标准</th>
+        <th>评分</th>
+        <th>头像</th>
+        <th>地址</th>
+        <th>推荐指数</th>
+        <th>状态</th>
         <th>创建时间(addTime)</th>
         <th>操作(修改)</th>
         <th>操作(删除)</th>
@@ -246,49 +256,35 @@
         $('[data-my="inputAvatar"]').change(choiceAvatar);
     });
 
-    //页面专用的代码从这里开始
-
-    $("#openAddModalBtn").click(function () {
-        getAndFill("${app}/businessrest/listJSON", $('#addModal [id="blist"]'), "bid", "bname");
-        getAndFill("${app}/typesrest/listJSON", $('#addModal [id="tlist"]'), "tid", "tname");
-    });
-
-
     //修改信息时从远端获取数据并填入表单
-    function updateForm(ele) {
-        //声明变量用以接收原始值,主要用于填写下拉列表
-        var choice1;
-        var choice2;
-
+    function updateForm(eve) {
         //打开模态框
         $("#updateModal").modal({backdrop: "static"});
         //将表单中原有数据清空,包括数据区内容
         $("#updateModal form").get(0).reset();
         //从服务器获取信息填入修改表单中
         $.ajax({
-            url: ele.target.href,
+            url: eve.target.href,
             type: "GET",
             success: function (result) {
                 //回填数据
-                $('#updateModal [name="gid"]').val(result.dataZone.obj.gid);
-                $('#updateModal [name="gname"]').val(result.dataZone.obj.gname);
-                $('#updateModal [name="gdes"]').val(result.dataZone.obj.gdes);
-                $('#updateModal [name="gprice"]').val(result.dataZone.obj.gprice);
-                $('#updateModal [data-my="disAvatar"]').attr('src', result.dataZone.obj.gavatar == '' ? '/upload/null.png' : result.dataZone.obj.gavatar);
-                $('#updateModal [name="fbid"]').val(result.dataZone.obj.fbid);
-                choice1 = result.dataZone.obj.fbid;
-                $('#updateModal [name="ftid"]').val(result.dataZone.obj.ftid);
-                choice2 = result.dataZone.obj.ftid;
-                $('#updateModal [name="addTime"]').val(new Date(result.dataZone.obj.addTime).Format("yyyy-MM-dd"));
+                $('#updateModal [name="bid"]').val(result.dataZone.obj.bid);
+                $('#updateModal [name="bname"]').val(result.dataZone.obj.bname);
+                $('#updateModal [name="bpass"]').val(result.dataZone.obj.bpass);
+                $('#updateModal [name="bdes"]').val(result.dataZone.obj.bdes);
+                $('#updateModal [name="bdelivery"]').val(result.dataZone.obj.bdelivery);
+                $('#updateModal [name="baddress"]').val(result.dataZone.obj.baddress);
+                $('#updateModal [name="bmark"]').val(result.dataZone.obj.bmark);
+                $('#updateModal [data-my="disAvatar"]').attr('src', result.dataZone.obj.bavatar == '' ? '/upload/null.png' : result.dataZone.obj.bavatar);
+                $('#updateModal [name="brecommendation"]').val(result.dataZone.obj.brecommendation);
+                // 复选框的处理方式
+                $('#updateModal [name="bstatus"]').prop('checked', result.dataZone.obj.bstatus);
+                $('#updateModal [name="addTime"]').val(new Date(result.dataZone.obj.addTime).Format("yyyy-MM-dd HH:mm:ss"));
 
             },
             error: function () {
             }
         });
-
-        //填充列表
-        getAndFill("${app}/businessrest/listJSON", $('#updateModal [id="ublist"]'), "bid", "bname", choice1);
-        getAndFill("${app}/typesrest/listJSON", $('#updateModal [id="utlist"]'), "tid", "tname", choice2);
 
         return false;//取消超链接的默认跳转
     }
@@ -302,28 +298,32 @@
             //构建行
             var uTr = $("<tr></tr>");
             //构建多个单元格
-            var checkboxTh = $('<th><input type="checkbox" name="choiceList" value="${item.gid}"/></th>');
+            var checkboxTh = $('<th><input type="checkbox" name="choiceList" value="${item.bid}"/></th>');
             var countTh = $('<th></th>').text(index + 1);
-            var td1 = $('<td></td>').text(item.gid);
-            var td2 = $('<td></td>').text(item.gname);
-            var td3 = $('<td></td>').text(item.gdes);
-            var td4 = $('<td></td>').text(item.gprice.toFixed(2));
-            var td5 = $('<td></td>').text(item.gavatar);
-            var td6 = $('<td></td>').text(item.business.bname);
-            var td7 = $('<td></td>').text(item.types.tname);
+            var td1 = $('<td></td>').text(item.bid);
+            var td2 = $('<td></td>').text(item.bname);
+            var td3 = $('<td></td>').text(item.bpass);
+            var td4 = $('<td></td>').text(item.bdes);
+            var td5 = $('<td></td>').text(item.bdelivery);
+            var td6 = $('<td></td>').text(item.bmark);
+            var td7 = $('<td></td>').text(item.bavatar);
+            var td8 = $('<td></td>').text(item.baddress);
+            var td9 = $('<td></td>').text(item.brecommendation);
+            //如果显示布尔值,建议使用三元表达式快速处理
+            var td10 = $('<td></td>').text(item.bstatus == true ? '禁用' : '启用');
             var addTimeTd = $('<td></td>').text(new Date(item.addTime).Format("yyyy-MM-dd HH:mm:ss"));
-            var upBtnTd = $('<td></td>').html('<a class="upBtn btn btn-info btn-sm" href="${app}/goodsrest/opt/' + item.gid + '">修改</a>');
-            var delBtnTd = $('<td></td>').html('<a class="delBtn btn btn-danger btn-sm" href="${app}/goodsrest/opt/' + item.gid + '">删除</a>');
+            var upBtnTd = $('<td></td>').html('<a class="upBtn btn btn-info btn-sm" href="${app}/businessrest/opt/' + item.bid + '">修改</a>');
+            var delBtnTd = $('<td></td>').html('<a class="delBtn btn btn-danger btn-sm" href="${app}/businessrest/opt/' + item.bid + '">删除</a>');
             //将单元格追加到行中
             uTr.append(checkboxTh).append(countTh)
-                .append(td1).append(td2).append(td3).append(td4).append(td5).append(td6).append(td7)
+                .append(td1).append(td2).append(td3).append(td4).append(td5)
+                .append(td6).append(td7).append(td8).append(td9).append(td10)
                 .append(addTimeTd)
                 .append(upBtnTd).append(delBtnTd);
             // 将行追加到表体中
             $("#objTable tbody").append(uTr);
         });
     }
-
 </script>
 </body>
 </html>
